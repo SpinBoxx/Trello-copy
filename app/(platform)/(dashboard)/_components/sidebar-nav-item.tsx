@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import type { OrganizationResource } from "@clerk/types/dist/organization";
 import { Activity, CreditCard, Layout, Settings } from "lucide-react";
@@ -50,7 +51,9 @@ const SidebarNavItem = ({
     },
   ];
 
-  const onClick = () => {};
+  const onClick = (href: string) => {
+    router.push(href);
+  };
   return (
     <AccordionItem value={organization.id} className="border-none">
       <AccordionTrigger
@@ -77,7 +80,7 @@ const SidebarNavItem = ({
           <Button
             key={route.href}
             size="sm"
-            onClick={onClick}
+            onClick={() => onClick(route.href)}
             className={cn(
               "mb-1 w-full justify-start pl-10 font-normal",
               pathname === route.href && "bg-sky-500/10 text-sky-700"
@@ -94,3 +97,14 @@ const SidebarNavItem = ({
 };
 
 export default SidebarNavItem;
+
+SidebarNavItem.Skeleton = function SkeletonSidebarNavItem() {
+  return (
+    <div className="flex items-center gap-x-2">
+      <div className="relative h-10 w-10 shrink-0">
+        <Skeleton className="absolute h-full w-full" />
+      </div>
+      <Skeleton className="h-10 w-full" />
+    </div>
+  );
+};
