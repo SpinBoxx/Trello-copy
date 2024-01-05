@@ -13,6 +13,7 @@ import { FormInput } from "./form-input";
 import { FormSubmit } from "./form-submit";
 import { useAction } from "@/hooks/use-action";
 import { createBoard } from "@/actions/create-board";
+import { toast } from "sonner";
 
 interface Props {
   children: ReactNode;
@@ -22,11 +23,13 @@ interface Props {
 }
 
 const FormPopover = ({ align, children, side, sideOffset }: Props) => {
-  const { execute, fieldErrors } = useAction(createBoard, {
+  const { execute, fieldErrors, isLoading } = useAction(createBoard, {
     onSuccess: (data) => {
+      toast.success("Board created !");
       console.log({ data });
     },
     onError: (error) => {
+      toast.error(error);
       console.log({ error });
     },
   });
@@ -37,7 +40,7 @@ const FormPopover = ({ align, children, side, sideOffset }: Props) => {
   };
   return (
     <Popover>
-      <PopoverTrigger>{children}</PopoverTrigger>
+      <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent
         align={align}
         className="w-80 pt-3"
@@ -57,9 +60,16 @@ const FormPopover = ({ align, children, side, sideOffset }: Props) => {
         </PopoverClose>
         <form action={onSubmit} className="space-y-4">
           <div className="space-y-4">
-            <FormInput id="title" label="Board title" type="text" />
+            <FormInput
+              id="title"
+              label="Board title"
+              type="text"
+              errors={fieldErrors}
+            />
           </div>
-          <FormSubmit className="w-full">Create</FormSubmit>
+          <FormSubmit disabled={isLoading} className="w-full">
+            Create {isLoading ? "ok" : "pas"}
+          </FormSubmit>
         </form>
       </PopoverContent>
     </Popover>
