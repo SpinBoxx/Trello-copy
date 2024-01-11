@@ -15,4 +15,14 @@ model Board {
   id String @id @default(uuid())
 
   title String 
+
+  orgId String
+  imageId String
+  imageThumbUrl String @db.Text 
+  imageFullUrl String @db.Text
+  imageUsername String @db.Text
+  imageLinkHTML String @db.Text
+
+  createAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -22,7 +22,7 @@ export const FormSubmit = ({
   children,
   disabled,
   className,
-  variant,
+  variant = "primary",
 }: Props) => {
   return (
     <Button
