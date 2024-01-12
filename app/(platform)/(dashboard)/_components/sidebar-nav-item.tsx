@@ -8,6 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { auth, useOrganizationList } from "@clerk/nextjs";
 import type { OrganizationResource } from "@clerk/types/dist/organization";
 import { Activity, CreditCard, Layout, Settings } from "lucide-react";
 import Image from "next/image";
@@ -27,6 +28,7 @@ const SidebarNavItem = ({
   organization,
 }: Props) => {
   const router = useRouter();
+  const { setActive } = useOrganizationList();
   const pathname = usePathname();
   const routes = [
     {
@@ -51,7 +53,8 @@ const SidebarNavItem = ({
     },
   ];
 
-  const onClick = (href: string) => {
+  const onClick = async (href: string) => {
+    await setActive?.({ organization: organization.id });
     router.push(href);
   };
   return (

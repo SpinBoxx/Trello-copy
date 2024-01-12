@@ -3,13 +3,13 @@ import { Info } from "./_components/info";
 import { Separator } from "@/components/ui/separator";
 import BoardList from "./_components/board-list";
 import { Suspense } from "react";
+import { Loader2 } from "lucide-react";
 
 interface Props {
   params: {
     organizationId: string;
   };
 }
-
 const OrganizationPage = ({ params }: Props) => {
   const { userId, orgId } = auth();
   return (
@@ -24,5 +24,4 @@ const OrganizationPage = ({ params }: Props) => {
     </div>
   );
 };
-
 export default OrganizationPage;
