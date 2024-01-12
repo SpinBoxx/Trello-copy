@@ -42,7 +42,10 @@ export const useAction = <TInput, TOutput>(
         }
       } catch (error) {
       } finally {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 200);
+
         options.onComplete?.();
       }
     },

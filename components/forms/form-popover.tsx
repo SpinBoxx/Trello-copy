@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/popover";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { Button } from "../ui/button";
-import { X } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 import { FormInput } from "./form-input";
 import { FormSubmit } from "./form-submit";
 import { useAction } from "@/hooks/use-action";
@@ -31,7 +31,7 @@ const FormPopover = ({ align, children, side, sideOffset }: Props) => {
     onSuccess: (data) => {
       toast.success("Board created !");
       closeRef.current?.click();
-      router.push(`/board/${data.id}`);
+      // router.push(`/board/${data.id}`);
     },
     onError: (error) => {
       toast.error(error);
@@ -75,7 +75,11 @@ const FormPopover = ({ align, children, side, sideOffset }: Props) => {
             />
           </div>
           <FormSubmit disabled={isLoading} className="w-full">
-            Create
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              "Create"
+            )}
           </FormSubmit>
         </form>
       </PopoverContent>
