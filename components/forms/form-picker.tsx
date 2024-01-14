@@ -17,8 +17,6 @@ interface Props {
 }
 
 export const FormPicker = ({ id, errors }: Props) => {
-  errors = { title: ["okai"] };
-
   const { pending } = useFormStatus();
   const [images, setImages] = useState<Array<Record<string, any>>>([]);
   const [isLoading, setIsLoading] = useState(true);

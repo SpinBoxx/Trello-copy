@@ -26,7 +26,7 @@ interface Props {
 
 const FormPopover = ({ align, children, side, sideOffset }: Props) => {
   const closeRef = useRef<ElementRef<"button">>(null);
-  const router = useRouter();
+
   const { execute, fieldErrors, isLoading } = useAction(createBoard, {
     onSuccess: (data) => {
       toast.success("Board created !");
@@ -34,6 +34,8 @@ const FormPopover = ({ align, children, side, sideOffset }: Props) => {
       // router.push(`/board/${data.id}`);
     },
     onError: (error) => {
+      console.log({ error });
+
       toast.error(error);
     },
   });

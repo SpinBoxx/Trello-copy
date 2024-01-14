@@ -54,7 +54,6 @@ const BoardList = async () => {
           </div>
         </FormPopover>
       </div>
-      Board
     </div>
   );
 };

@@ -7,7 +7,6 @@ interface Props {
 
 export const FormErrors = ({ id, errors }: Props) => {
   if (!errors) return null;
-  console.log(errors);
 
   return (
     <div
