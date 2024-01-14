@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import BoardList from "./_components/board-list";
 import { Suspense } from "react";
 import { Loader2 } from "lucide-react";
+import { redirect } from "next/navigation";
 
 interface Props {
   params: {
@@ -12,6 +13,7 @@ interface Props {
 }
 const OrganizationPage = ({ params }: Props) => {
   const { userId, orgId } = auth();
+  if (!orgId || !userId) redirect("/select-org");
   return (
     <div className="mb-20 w-full">
       <Info />
