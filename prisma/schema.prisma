@@ -22,7 +22,7 @@ model Board {
   imageFullUrl String @db.Text
   imageUsername String @db.Text
   imageLinkHTML String @db.Text
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   lists BoardList[]
@@ -33,7 +33,7 @@ model BoardList {
   
   title String 
   order Int
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
 
@@ -48,7 +48,7 @@ model BoardCard {
   title String 
   order Int
   description String? @db.Text
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   boardListId String
