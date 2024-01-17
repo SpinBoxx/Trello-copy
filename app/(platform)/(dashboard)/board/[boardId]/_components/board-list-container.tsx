@@ -42,8 +42,6 @@ const BoardListContainer = ({ boardId, boardList }: Props) => {
     {
       onSuccess: () => toast.success("Cards reordered."),
       onError: (error) => {
-        console.log(error);
-
         toast.error(error);
       },
     }
@@ -134,8 +132,6 @@ const BoardListContainer = ({ boardId, boardList }: Props) => {
           card.order = index;
         });
 
-        console.log(orderedBoardList);
-
         setOrderedBoardList(orderedBoardList);
         executeUpdateCardsOrder({
           boardId,
@@ -144,10 +140,6 @@ const BoardListContainer = ({ boardId, boardList }: Props) => {
       }
     }
   };
-
-  useEffect(() => {
-    console.log(orderedBoardList);
-  }, [orderedBoardList, setOrderedBoardList]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
