@@ -7,8 +7,8 @@ import { createSafeAction } from "@/lib/create-safe-action";
 import {
   BoardListCopyInputType,
   BoardListCopyReturnType,
-} from "./update-board-types";
-import { BoardListCopySchema } from "./update-board-list-schema";
+} from "./copy-board-list-types";
+import { BoardListCopySchema } from "./copy-board-list-schema";
 
 const handler = async (
   data: BoardListCopyInputType

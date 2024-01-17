@@ -7,8 +7,8 @@ import { createSafeAction } from "@/lib/create-safe-action";
 import {
   BoardListDeleteInputType,
   BoardListDeleteReturnType,
-} from "./update-board-types";
-import { BoardListDeleteSchema } from "./update-board-list-schema";
+} from "./delete-board-list-types";
+import { BoardListDeleteSchema } from "./delete-board-list-schema";
 
 const handler = async (
   data: BoardListDeleteInputType

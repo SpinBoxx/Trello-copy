@@ -2,7 +2,7 @@
 
 import { BoardListCopyAction } from "@/actions/copy-board-list";
 import { BoardListDeleteAction } from "@/actions/delete-board-list";
-import { BoardListDeleteSchema } from "@/actions/delete-board-list/update-board-list-schema";
+import { BoardListDeleteSchema } from "@/actions/delete-board-list/delete-board-list-schema";
 import { FormSubmit } from "@/components/forms/form-submit";
 import { Button } from "@/components/ui/button";
 import {

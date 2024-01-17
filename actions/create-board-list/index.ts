@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs";
 import {
   BoardListCreateInputType,
   BoardListCreateReturnType,
-} from "./update-board-types";
+} from "./create-board-list-types";
 import prismadb from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";

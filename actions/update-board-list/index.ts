@@ -7,7 +7,7 @@ import { createSafeAction } from "@/lib/create-safe-action";
 import {
   BoardListUpdateInputType,
   BoardListUpdateReturnType,
-} from "./update-board-types";
+} from "./update-board-list-types";
 import { BoardListUpdateSchema } from "./update-board-list-schema";
 
 const handler = async (
