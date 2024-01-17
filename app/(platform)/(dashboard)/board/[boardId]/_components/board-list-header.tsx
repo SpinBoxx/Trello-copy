@@ -7,6 +7,7 @@ import { BoardList } from "@prisma/client";
 import { ElementRef, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useEventListener } from "usehooks-ts";
+import BoardListOptions from "./board-list-options";
 
 interface Props {
   boardList: BoardList;
@@ -80,6 +81,7 @@ const BoardListHeader = ({ boardList }: Props) => {
           {boardList.title}
         </div>
       )}
+      <BoardListOptions boardList={boardList} onAddCard={() => {}} />
     </div>
   );
 };
