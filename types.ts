@@ -7,3 +7,9 @@ export type BoardListWithBoardCards = BoardList & {
 export type BoardCardWithBoardList = BoardCard & {
   boardList: BoardList;
 };
+
+export type BoardCardWithBoardListTitle = BoardCard & {
+  boardList: {
+    title: string;
+  };
+};

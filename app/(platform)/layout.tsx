@@ -1,3 +1,5 @@
+import ModalProvider from "@/providers/modal-provider";
+import { QueryProvider } from "@/providers/query-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
@@ -9,8 +11,11 @@ interface Props {
 const PlatformLayout = ({ children }: Props) => {
   return (
     <ClerkProvider>
-      <Toaster />
-      {children}
+      <QueryProvider>
+        <Toaster />
+        <ModalProvider />
+        {children}
+      </QueryProvider>
     </ClerkProvider>
   );
 };
