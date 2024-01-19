@@ -11,6 +11,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useCardModalStore } from "@/stores/use-card-modal";
 import { useQuery } from "@tanstack/react-query";
 import Header from "./header";
+import Description from "./description";
+import Actions from "./actions";
 
 const CardModal = () => {
   const { isOpen, onClose, cardId } = useCardModalStore();
@@ -44,7 +46,22 @@ const CardModal = () => {
             <Header.Skeleton />
           )}
         </DialogHeader>
-        <div></div>
+        <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4">
+          <div className="col-span-3">
+            <div className="w-full space-y-6">
+              {cardData && cardData.card ? (
+                <Description card={cardData.card} />
+              ) : (
+                <Description.Skeleton />
+              )}
+            </div>
+          </div>
+          {cardData && cardData.card ? (
+            <Actions card={cardData.card} />
+          ) : (
+            <Actions.Skeleton />
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );

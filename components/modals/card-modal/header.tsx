@@ -16,7 +16,6 @@ interface Props {
 }
 
 const Header = ({ cardWithList }: Props) => {
-  const formRef = useRef<ElementRef<"form">>(null);
   const inputRef = useRef<ElementRef<"input">>(null);
   const queryClient = useQueryClient();
   const params = useParams();
@@ -41,7 +40,6 @@ const Header = ({ cardWithList }: Props) => {
   });
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string;
-    console.log(title);
 
     if (title === cardWithList.title) {
       return;
