@@ -7,7 +7,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useCardModalStore } from "@/stores/use-card-modal";
 import { useQuery } from "@tanstack/react-query";
 import Header from "./header";

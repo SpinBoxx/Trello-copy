@@ -9,6 +9,7 @@ import {
   BoardCardCopyReturnType,
 } from "./copy-board-card-types";
 import { BoardCardCopySchema } from "./copy-board-card-schema";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
 
 const handler = async (
   data: BoardCardCopyInputType

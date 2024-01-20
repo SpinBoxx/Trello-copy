@@ -5,7 +5,11 @@ import { useOrganization } from "@clerk/nextjs";
 import { CreditCard } from "lucide-react";
 import Image from "next/image";
 
-export const OrgInfo = () => {
+interface Props {
+  isPro: boolean;
+}
+
+export const OrgInfo = ({ isPro }: Props) => {
   const { organization, isLoaded } = useOrganization();
   if (!isLoaded) return <OrgInfo.Skeleton />;
   return (
@@ -21,7 +25,7 @@ export const OrgInfo = () => {
       <div className="space-y-1">
         <p className="text-xl font-semibold">{organization?.name}</p>
         <div className="flex items-center text-xs text-muted-foreground ">
-          <CreditCard className="mr-1 h-4 w-4" /> Free
+          <CreditCard className="mr-1 h-4 w-4" /> {isPro ? "Pro" : "Free"}
         </div>
       </div>
     </div>

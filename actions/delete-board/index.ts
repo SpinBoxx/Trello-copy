@@ -12,6 +12,7 @@ import {
 } from "./delete-board-types";
 import { redirect } from "next/navigation";
 import { createAuditLog } from "@/services/audit-log/create-audit-log";
+import { decrementAvailableBoardsCount } from "@/services/organization-limit";
 
 const handler = async (
   data: BoardDeleteInputType
@@ -40,6 +41,8 @@ const handler = async (
       entityTitle: board.title,
       entityType: "BOARD",
     });
+
+    await decrementAvailableBoardsCount();
   } catch (error) {
     return {
       error: "Failed to delete.",

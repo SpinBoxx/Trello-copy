@@ -1,7 +1,10 @@
 import FormPopover from "@/components/forms/form-popover";
 import Hint from "@/components/hint";
 import { Skeleton } from "@/components/ui/skeleton";
+import { MAX_FREE_BOARDS } from "@/constants/boards";
 import prismadb from "@/lib/prisma";
+import { getAvailableBoardsToCreate } from "@/services/organization-limit";
+import { isSubcriptionValid } from "@/services/subscription";
 import { auth } from "@clerk/nextjs";
 import { HelpCircle, Users2 } from "lucide-react";
 import Link from "next/link";
@@ -19,6 +22,8 @@ const BoardList = async () => {
       createdAt: "desc",
     },
   });
+  const availableBoardsToCreate = await getAvailableBoardsToCreate();
+  const isPro = await isSubcriptionValid();
   return (
     <div className="space-y-4">
       <div className="flex items-center text-lg font-semibold text-neutral-700">
@@ -43,7 +48,11 @@ const BoardList = async () => {
             className="hover:opcaity-75 relative flex aspect-video h-full w-full flex-col items-center justify-center gap-y-1 rounded-sm bg-muted transition"
           >
             <p className="text-sm">Create new board</p>
-            <span className="text-sm">5 remaining </span>
+            <span className="text-sm">
+              {isPro
+                ? "Unlimited"
+                : `${MAX_FREE_BOARDS - availableBoardsToCreate} remaining`}
+            </span>
             <Hint
               description={`Free workspaces can have up to 5 open boards. For unlimited boards, upgrade this workspace.`}
               sideOffset={1}
