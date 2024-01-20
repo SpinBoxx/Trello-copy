@@ -1,12 +1,9 @@
 "use server";
 
 import { auth } from "@clerk/nextjs";
-
 import prismadb from "@/lib/prisma";
-
 import { BoardCard } from "@prisma/client";
 import { wait } from "@/lib/utils";
-import { unstable_noStore } from "next/cache";
 
 type ReturnType = {
   card?: BoardCard & {
@@ -19,17 +16,13 @@ type ReturnType = {
 
 const handler = async (cardId?: string): Promise<ReturnType> => {
   const { userId, orgId } = auth();
-  // throw new Error("test");
+
   if (!userId || !orgId)
     return {
       error: "Unauthorized",
     };
 
   try {
-    console.log("wait");
-    // unstable_noStore();
-    // await wait(5000);
-    console.log("OK");
     const card = await prismadb.boardCard.findUnique({
       where: {
         id: cardId,

@@ -9,6 +9,7 @@ import {
   BoardListCopyReturnType,
 } from "./copy-board-list-types";
 import { BoardListCopySchema } from "./copy-board-list-schema";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
 
 const handler = async (
   data: BoardListCopyInputType
@@ -61,6 +62,13 @@ const handler = async (
       include: {
         boardCards: true,
       },
+    });
+
+    await createAuditLog({
+      action: "CREATE",
+      entityId: list.id,
+      entityTitle: list.title,
+      entityType: "LIST",
     });
   } catch (error) {
     return {

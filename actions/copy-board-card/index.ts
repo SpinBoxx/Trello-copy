@@ -55,6 +55,13 @@ const handler = async (
         boardListId: cardToCopy.boardListId,
       },
     });
+
+    await createAuditLog({
+      action: "CREATE",
+      entityId: card.id,
+      entityTitle: card.title,
+      entityType: "CARD",
+    });
   } catch (error) {
     return {
       error: "Failed to copy.",

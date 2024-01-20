@@ -9,6 +9,7 @@ import {
   BoardCardDeleteReturnType,
 } from "./delete-board-card-types";
 import { BoardCardDeleteSchema } from "./delete-board-card-schema";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
 
 const handler = async (
   data: BoardCardDeleteInputType
@@ -33,6 +34,12 @@ const handler = async (
           },
         },
       },
+    });
+    await createAuditLog({
+      action: "DELETE",
+      entityId: card.id,
+      entityTitle: card.title,
+      entityType: "CARD",
     });
   } catch (error) {
     return {

@@ -44,6 +44,9 @@ const Description = ({ card }: Props) => {
       queryClient.invalidateQueries({
         queryKey: ["card", card.id],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["card-logs", card.id],
+      });
       toast.success(`Card "${card.title}" updated.`);
     },
     onError: (error) => toast.error(error),
@@ -108,9 +111,9 @@ Description.Skeleton = function DescriptionSkeleton() {
   return (
     <div className="flex w-full items-start gap-x-3">
       <Skeleton className="h-6 w-6 bg-neutral-200" />
-      <div className="sapce-y-2 w-full">
+      <div className="w-full space-y-2">
         <Skeleton className="h-6 w-24 bg-neutral-200" />
-        <Skeleton className="h-20 w-full bg-neutral-200" />
+        <Skeleton className="h-10 w-full bg-neutral-200" />
       </div>
     </div>
   );

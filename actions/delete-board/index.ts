@@ -11,6 +11,7 @@ import {
   BoardDeleteReturnType,
 } from "./delete-board-types";
 import { redirect } from "next/navigation";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
 
 const handler = async (
   data: BoardDeleteInputType
@@ -31,6 +32,13 @@ const handler = async (
         id,
         orgId,
       },
+    });
+
+    await createAuditLog({
+      action: "DELETE",
+      entityId: board.id,
+      entityTitle: board.title,
+      entityType: "BOARD",
     });
   } catch (error) {
     return {

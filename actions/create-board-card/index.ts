@@ -10,6 +10,8 @@ import {
   BoardCardCreateInputType,
   BoardCardCreateReturnType,
 } from "./create-board-card-types";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
+import { ENTITY_TYPE } from "@prisma/client";
 
 const handler = async (
   data: BoardCardCreateInputType
@@ -22,7 +24,6 @@ const handler = async (
     };
 
   const { title, boardId, boardListId } = data;
-  let list;
 
   try {
     const list = await prismadb.boardList.findUnique({
@@ -52,7 +53,12 @@ const handler = async (
         order: newOrder,
       },
     });
-
+    await createAuditLog({
+      action: "CREATE",
+      entityId: card.id,
+      entityTitle: card.title,
+      entityType: "CARD",
+    });
     revalidatePath(`/board/${boardId}`);
     return { data: card };
   } catch (error) {

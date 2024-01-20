@@ -13,14 +13,23 @@ import { useQuery } from "@tanstack/react-query";
 import Header from "./header";
 import Description from "./description";
 import Actions from "./actions";
+import { GetAuditLogs } from "@/actions/get-audit-logs";
+import { Activity } from "./activity";
 
 const CardModal = () => {
   const { isOpen, onClose, cardId } = useCardModalStore();
 
-  const { data: cardData, isLoading } = useQuery({
-    queryKey: ["card", cardId ?? "53ca7cdf-711e-4606-bb8d-689a622f6cff"],
+  const { data: cardData } = useQuery({
+    queryKey: ["card", cardId],
     queryFn: () => {
       if (cardId) return GetCardAction(cardId);
+    },
+  });
+
+  const { data: auditLogsData } = useQuery({
+    queryKey: ["card-logs", cardId],
+    queryFn: () => {
+      if (cardId) return GetAuditLogs(cardId);
     },
   });
 
@@ -53,6 +62,11 @@ const CardModal = () => {
                 <Description card={cardData.card} />
               ) : (
                 <Description.Skeleton />
+              )}
+              {auditLogsData && auditLogsData.auditLogs ? (
+                <Activity activity={auditLogsData.auditLogs} />
+              ) : (
+                <Activity.Skeleton />
               )}
             </div>
           </div>

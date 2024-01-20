@@ -10,6 +10,7 @@ import {
   BoardCardUpdateReturnType,
 } from "./update-board-types";
 import { BoardCardUpdateSchema } from "./update-board-schema";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
 
 const handler = async (
   data: BoardCardUpdateInputType
@@ -37,6 +38,13 @@ const handler = async (
       data: {
         ...values,
       },
+    });
+
+    await createAuditLog({
+      action: "UPDATE",
+      entityId: card.id,
+      entityTitle: card.title,
+      entityType: "CARD",
     });
   } catch (error) {
     return {

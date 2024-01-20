@@ -9,6 +9,7 @@ import {
   BoardListUpdateReturnType,
 } from "./update-board-list-types";
 import { BoardListUpdateSchema } from "./update-board-list-schema";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
 
 const handler = async (
   data: BoardListUpdateInputType
@@ -35,6 +36,13 @@ const handler = async (
       data: {
         title,
       },
+    });
+
+    await createAuditLog({
+      action: "UPDATE",
+      entityId: list.id,
+      entityTitle: list.title,
+      entityType: "LIST",
     });
   } catch (error) {
     return {

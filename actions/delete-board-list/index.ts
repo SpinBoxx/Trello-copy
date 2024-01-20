@@ -9,6 +9,7 @@ import {
   BoardListDeleteReturnType,
 } from "./delete-board-list-types";
 import { BoardListDeleteSchema } from "./delete-board-list-schema";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
 
 const handler = async (
   data: BoardListDeleteInputType
@@ -32,6 +33,13 @@ const handler = async (
           orgId,
         },
       },
+    });
+
+    await createAuditLog({
+      action: "DELETE",
+      entityId: list.id,
+      entityTitle: list.title,
+      entityType: "LIST",
     });
   } catch (error) {
     return {

@@ -9,6 +9,7 @@ import prismadb from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { BoardListCreateSchema } from "./create-board-list-schema";
+import { createAuditLog } from "@/services/audit-log/create-audit-log";
 
 const handler = async (
   data: BoardListCreateInputType
@@ -55,6 +56,13 @@ const handler = async (
         order: newOrder,
         boardId,
       },
+    });
+
+    await createAuditLog({
+      action: "CREATE",
+      entityId: list.id,
+      entityTitle: list.title,
+      entityType: "LIST",
     });
   } catch (error) {
     return {

@@ -1,9 +1,8 @@
 import { auth } from "@clerk/nextjs";
-import { Info } from "./_components/info";
+import { OrgInfo } from "./_components/info";
 import { Separator } from "@/components/ui/separator";
 import BoardList from "./_components/board-list";
 import { Suspense } from "react";
-import { Loader2 } from "lucide-react";
 import { redirect } from "next/navigation";
 
 interface Props {
@@ -16,7 +15,7 @@ const OrganizationPage = ({ params }: Props) => {
   if (!orgId || !userId) redirect("/select-org");
   return (
     <div className="mb-20 w-full">
-      <Info />
+      <OrgInfo />
       <Separator className="my-4" />
       <div className="px-2 md:px-4">
         <Suspense fallback={<BoardList.Skeleton />}>
