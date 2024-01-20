@@ -13,6 +13,7 @@ import {
 import { redirect } from "next/navigation";
 import { createAuditLog } from "@/services/audit-log/create-audit-log";
 import { decrementAvailableBoardsCount } from "@/services/organization-limit";
+import { isSubcriptionValid } from "@/services/subscription";
 
 const handler = async (
   data: BoardDeleteInputType
@@ -42,7 +43,8 @@ const handler = async (
       entityType: "BOARD",
     });
 
-    await decrementAvailableBoardsCount();
+    const isPro = await isSubcriptionValid();
+    if (!isPro) await decrementAvailableBoardsCount();
   } catch (error) {
     return {
       error: "Failed to delete.",
