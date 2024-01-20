@@ -25,7 +25,7 @@ const ActivityList = async ({ props }: Props) => {
         No activity found inside this organization
       </p>
       {auditLogs.map((auditLog) => (
-        <ActivityItem auditLog={auditLog} />
+        <ActivityItem key={auditLog.id} auditLog={auditLog} />
       ))}
     </ol>
   );

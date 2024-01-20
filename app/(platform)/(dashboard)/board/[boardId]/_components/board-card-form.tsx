@@ -1,20 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import BoardListWrapper from "./board-list-wrapper";
 import { Plus, X } from "lucide-react";
-import {
-  ElementRef,
-  KeyboardEventHandler,
-  forwardRef,
-  useRef,
-  useState,
-} from "react";
+import { ElementRef, KeyboardEventHandler, forwardRef, useRef } from "react";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
-import { FormInput } from "@/components/forms/form-input";
 import { FormSubmit } from "@/components/forms/form-submit";
 import { useAction } from "@/hooks/use-action";
-import { BoardListCreateAction } from "@/actions/create-board-list";
 import { toast } from "sonner";
 import { FormTextarea } from "@/components/forms/form-textarea";
 import { BoardCardCreateAction } from "@/actions/create-board-card";
@@ -104,4 +95,5 @@ const BoardCardForm = forwardRef<HTMLTextAreaElement, Props>(
   }
 );
 
+BoardCardForm.displayName = "BoardCardForm";
 export default BoardCardForm;
